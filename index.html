@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dulce Encanto - Reposteria</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff8f0;
+      color: #4b2e2e;
+    }
+
+    header {
+      background: #f8c8dc;
+      text-align: center;
+      padding: 1em 0;
+      position: relative;
+    }
+
+    header .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: pink;
+      color: black;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+
+    #cart {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #cart button {
+      background: #d9534f;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 0;
+    }
+
+    nav ul li button {
+      background: none;
+      border: none;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #4b2e2e;
+      padding: 10px 15px;
+    }
+
+    nav ul li button:hover {
+      background: #f195b2;
+      border-radius: 5px;
+      color: white;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .seccion {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .galeria-principal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .galeria-principal img {
+      width: 180px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .galeria {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .producto {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      cursor: grab;
+      text-align: center;
+    }
+
+    .producto img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    form input,
+    form textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    form button {
+      background: #f195b2;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .social-fixed {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .social-fixed a {
+      background: #f8c8dc;
+      color: #4b2e2e;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .social-fixed a:hover {
+      background: #f195b2;
+      color: white;
+    }
+
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 35px;
+      height: 35px;
+    }
+
+    .whatsapp img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .visible {
+      display: block !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">MC</div>
+    <h1>Bienvenidos A Dulce Encanto - Reposteria</h1>
+    <nav>
+      <ul>
+        <li><button onclick="mostrarSeccion('inicio')">Inicio</button></li>
+        <li><button onclick="mostrarSeccion('productos')">Productos</button></li>
+        <li><button onclick="mostrarSeccion('Nosotros')">Nosotros</button></li>
+        <li><button onclick="mostrarSeccion('contacto')">Contacto</button></li>
+      </ul>
+    </nav>
+    <div id="cart">
+      🛒 <span id="cart-count">0</span> - RD$<span id="cart-total">0.00</span>
+      <button onclick="comprar()">Comprar</button>
+      <button onclick="limpiarCarrito()">Limpiar</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="pantalla-principal" class="galeria-principal">
+      <img src="img/img.jpg" width="250" />
+      <img src="img/img2.jpg" width="250" />
+      <img src="img/img3.jpg" width="250" />
+      <img src="img/img4.jpg" width="250" />
+      <img src="img/img5.jpg" width="250" />
+      <img src="img/img6.jpg" width="250" />
+      <img src="img/img7.jpg" width="250" />
+      <img src="img/img8.jpg" width="250" />
+      <img src="img/img9.jpg" width="250" />
+      <img src="img/img10.jpg" width="250" />
+      <img src="img/img11.jpg" width="250" />
+      <img src="img/img12.jpg" width="250" />
+      <img src="img/img13.jpg" width="250" />
+    </div>
+
+    <section id="inicio" class="seccion" style="text-align: center;">
+      <h2> Dulce Encanto</h2>
+      <div style="
+        background: #ffe6f0;
+        border: 2px solid #f8a4c1;
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 700px;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-align: justify;
+      ">
+      <p><strong>Misión:</strong> Tenemos el compromiso de hacer a nuestros clientes felices con nuestros servicios.</p>
+      <p><strong>Visión:</strong> Ser la repostería preferida en el resto del país.</p>
+      <p><strong>Valores:</strong> Servir , pasión, innovacion , amor y respecto.</p>
+    </section>
+
+    <section id="productos" class="seccion">
+      <h2 style="text-align: center;">Nuestros Productos</h2>
+      <div class="galeria">
+        <div class="producto" draggable="true" data-precio="850">
+          <img src="img/img11.jpg" width="250" />
+          <h3>Pastel de Chocolate</h3>
+          <p>RD$850</p>
+        </div>
+        <div class="producto" draggable="true" data-precio="650">
+          <img src="img/img10.jpg" width="250" />
+          <h3>Cupcakes Decorados</h3>
+          <p>RD$650</p>
+        </div>
+        <div class="producto" draggable="true" data-precio="450">
+          <img src="img/img8.jpg" width="250" />
+          <h3>Galletas Artesanales</h3>
+          <p>RD$450</p>
+        </div>
+        <div class="producto" draggable="true" data-precio="450">
+          <img src="c:\Users\genes\OneDrive\Desktop\IMG\bizcochodevainilla.jpg" width="250" />
+          <h3>Bizcocho de Vainilla</h3>
+          <p>RD$350</p>
+      </div>
+      <div class="producto" draggable="true" data-precio="450">
+          <img src="c:\Users\genes\OneDrive\Desktop\IMG\img3.jpg" width="250" />
+          <h3>Bizcocho de Decorados</h3>
+          <p>RD$500</p>
+    </section>
+
+    <section id="Nosotros" class="seccion">
+      <h2 style="text-align: center;">Little History</h2>
+      <div style="
+    background: #ffe6f0;
+    border: 2px solid #f8a4c1;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 700px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: justify;
+  ">
+        <p>“Dulce Encanto” nace en Santo Domingo en 2015, cuando Meyling Cruz Castillo convirtió su pasión por la
+          repostería en un negocio familiar. Desde entonces, creamos postres frescos, nuevos y personalizados.</p>
+    </section>
+
+    <section id="contacto" class="seccion">
+      <h2 style="text-align: center;">Información</h2>
+      <form>
+        <input type="text" placeholder="Tu nombre" required />
+        <input type="email" placeholder="Tu correo" required />
+        <textarea placeholder="Escribe tu mensaje" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+      <h2>Estamos ubicados en:</h2>
+<iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3119.10237747256!2d-69.9946731!3d18.4694406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea561d63a534aeb%3A0xeaeaf920fde11912!2sProl.%20Av.%2027%20de%20Febrero%20%26%20C.%20Bohemia!5e1!3m2!1ses-419!2sdo!4v1744420443940!5m2!1ses-419!2sdo"
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+<script
+    src="https://onlinecompass.net/es/where-am-i" defer>
+</script>
+    </section>
+    <script>
+
+</script>
+    <div id="resumen-compra"
+      style="display:none; padding:20px; background:#fce4ec; margin:20px auto; border-radius:10px; max-width:500px;">
+      <h3>Resumen de tu compra</h3>
+      <p>Total de productos: <span id="resumen-cantidad"></span></p>
+      <p>Total a pagar: RD$<span id="resumen-total"></span></p>
+      <p>¡Gracias por confiar en Dulce Encanto!</p>
+    </div>
+  </main>
+
+  <!-- Redes Sociales Fijas -->
+  <div class="social-fixed">
+    <a href="https://facebook.com/tuempresa" target="_blank">Facebook</a>
+    <a href="https://instagram.com/tuempresa" target="_blank">Instagram</a>
+  </div>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/18095551234" class="whatsapp" target="_blank" title="WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp">
+  </a>
+
+  <script>
+    function mostrarSeccion(id) {
+      document.getElementById('pantalla-principal').style.display = 'none';
+      document.querySelectorAll('.seccion').forEach(s => s.classList.remove('visible'));
+      document.getElementById(id).classList.add('visible');
+    }
+
+    let cartCount = 0;
+    let cartTotal = 0;
+    const cartCountEl = document.getElementById('cart-count');
+    const cartTotalEl = document.getElementById('cart-total');
+
+    function limpiarCarrito() {
+      cartCount = 0;
+      cartTotal = 0;
+      cartCountEl.textContent = '0';
+      cartTotalEl.textContent = '0.00';
+      document.getElementById('resumen-compra').style.display = 'none';
+    }
+
+    function comprar() {
+      if (cartCount === 0) {
+        alert("El carrito está vacío.");
+      } else {
+        document.getElementById('resumen-cantidad').textContent = cartCount;
+        document.getElementById('resumen-total').textContent = cartTotal.toFixed(2);
+        document.getElementById('resumen-compra').style.display = 'block';
+        limpiarCarrito();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.producto').forEach(producto => {
+        producto.addEventListener('dragstart', () => {
+          const precio = parseFloat(producto.dataset.precio);
+          cartCount++;
+          cartTotal += precio;
+          cartCountEl.textContent = cartCount;
+          cartTotalEl.textContent = cartTotal.toFixed(2);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
